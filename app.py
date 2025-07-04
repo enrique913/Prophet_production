@@ -4,6 +4,7 @@ from prophet import Prophet
 from prophet.make_holidays import get_country_holidays_class
 from datetime import timedelta
 import plotly.graph_objects as go
+import openpyxl
 
 st.title("📈 Pronóstico de Llamadas con Prophet")
 
