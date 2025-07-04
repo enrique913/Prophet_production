@@ -62,11 +62,23 @@ if uploaded_file:
     calls_map = df_prophet.set_index("ds")["y"].to_dict()
     result["calls"] = result["date"].map(calls_map).fillna(0)
 
-    # Gráfica comparativa
+    # Gráfica comparativa con colores personalizados
     fig = go.Figure()
-    fig.add_trace(go.Scatter(x=result["date"], y=result["forecast"], mode='lines', name='Pronóstico'))
-    fig.add_trace(go.Scatter(x=result["date"], y=result["calls"], mode='lines', name='Llamadas reales'))
-    fig.update_layout(title="Comparación de Pronóstico vs Llamadas Reales", xaxis_title="Fecha", yaxis_title="Llamadas")
+    fig.add_trace(go.Scatter(
+        x=result["date"], y=result["forecast"],
+        mode='lines', name='Pronóstico',
+        line=dict(color='blue')
+    ))
+    fig.add_trace(go.Scatter(
+        x=result["date"], y=result["calls"],
+        mode='lines', name='Llamadas reales',
+        line=dict(color='orange')
+    ))
+    fig.update_layout(
+        title="Comparación de Pronóstico vs Llamadas Reales",
+        xaxis_title="Fecha",
+        yaxis_title="Llamadas"
+    )
     st.plotly_chart(fig)
 
     # Tabla de resultados
